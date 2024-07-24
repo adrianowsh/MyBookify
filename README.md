@@ -1,4 +1,4 @@
 ### Booking system
 
-#### Architetcture design:
+#### Architecture design:
 <img src="architecture.png" />

@@ -1,2 +1,2 @@
-﻿namespace MyBookify.Domain.User;
+﻿namespace MyBookify.Domain.Users;
 public sealed record Email(string email);

@@ -1,7 +1,7 @@
 ﻿using MyBookify.Domain.Abstractions;
-using MyBookify.Domain.User.Events;
+using MyBookify.Domain.Users.Events;
 
-namespace MyBookify.Domain.User;
+namespace MyBookify.Domain.Users;
 public sealed class User : Entity
 {
     private User(Guid id, FirstName firstName, LastName lastName, Email email)

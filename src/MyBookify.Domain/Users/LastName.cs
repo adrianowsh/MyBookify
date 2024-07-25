@@ -1,4 +1,4 @@
-﻿namespace MyBookify.Domain.User;
+﻿namespace MyBookify.Domain.Users;
 public sealed record LastName(string lastName);
 
 

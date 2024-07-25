@@ -1,4 +1,4 @@
 ﻿using MyBookify.Domain.Abstractions;
 
-namespace MyBookify.Domain.User.Events;
+namespace MyBookify.Domain.Users.Events;
 public sealed record UserCreatedDomainEvent(Guid UserId) : IDomainEvent;

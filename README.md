@@ -1,4 +1,4 @@
 ### Booking system
 ![Build](https://github.com/adrianowsh/MyBookify/actions/workflows/booking.yml/badge.svg)
-#### Architecture design:
+#### Clean Architecture design:
 <img src="architecture.png" />

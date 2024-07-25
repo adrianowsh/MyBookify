@@ -14,7 +14,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		architecture.png = architecture.png
 		Directory.Build.props = Directory.Build.props
+		.github\workflows\booking.yml = .github\workflows\booking.yml
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{C50010E7-D2C6-4616-94D2-B15B7FBEB0C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E49F2A85-4B23-48BA-8F6D-E1C3CA4D4BE9}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\booking.yml = .github\workflows\booking.yml
 	EndProjectSection
 EndProject
 Global
@@ -33,6 +41,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{03BAF5F9-83E9-48A0-9742-E24094BA4D37} = {380688DE-43D3-4EF6-A7A8-0637B8E6DD34}
+		{C50010E7-D2C6-4616-94D2-B15B7FBEB0C6} = {F7DFED7A-F354-48DC-95D2-1E44659FD041}
+		{E49F2A85-4B23-48BA-8F6D-E1C3CA4D4BE9} = {C50010E7-D2C6-4616-94D2-B15B7FBEB0C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {605922E6-6C89-415E-B5E0-2FD8345DFB9D}

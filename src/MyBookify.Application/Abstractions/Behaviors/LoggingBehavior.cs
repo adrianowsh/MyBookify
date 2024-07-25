@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using MyBookify.Domain.Abstractions;
 using Serilog.Context;
@@ -45,10 +46,10 @@ internal sealed class LoggingBehavior<TRequest, TResponse>
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, "Request {RequestName} processing failed", requestName);
-
-            throw;
+            _logger.LogError(exception, "Request {RequestName} processing failed with the message ", requestName);
         }
+
+        return default;
     }
 }
 

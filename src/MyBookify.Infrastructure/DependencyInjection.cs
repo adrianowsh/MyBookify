@@ -26,9 +26,9 @@ public static class DependencyInjection
         services.AddTransient<IEmailService, EmailService>();
 
         AddPersistence(services, configuration);
+
         return services;
     }
-
 
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
     {

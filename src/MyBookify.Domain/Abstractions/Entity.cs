@@ -5,7 +5,6 @@ public abstract class Entity
     protected Entity(Guid id)
     {
         Id = id;
-        InsertedAt = DateTime.Now;
     }
 
     protected Entity()
@@ -13,8 +12,6 @@ public abstract class Entity
     }
 
     public Guid Id { get; init; }
-    public DateTime InsertedAt { get; init; }
-    public DateTime? UpdatedAt { get; init; }
 
     public IReadOnlyList<IDomainEvent> GetDomainEvents()
     {

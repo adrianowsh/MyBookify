@@ -1,3 +1,4 @@
+using MyBookify.Api.Extensions;
 using MyBookify.Application;
 using MyBookify.Infrastructure;
 
@@ -16,7 +17,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.ApplyMigrations();
 }
+
+app.UseCustomExceptionHandler();
 
 app.UseHttpsRedirection();
 

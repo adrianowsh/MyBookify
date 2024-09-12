@@ -20,9 +20,14 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
+app.UseHttpsRedirection();
+
 app.UseCustomExceptionHandler();
 
-app.UseHttpsRedirection();
+app.UseAuthentication();
+
+app.UseAuthorization();
+
 
 app.MapControllers();
 

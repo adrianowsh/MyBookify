@@ -44,5 +44,6 @@ public sealed class Apartment : Entity
     public void SetLastBooked(DateTime? lastBookedOnUtc)
     {
         LastBookedOnUtc = lastBookedOnUtc;
+
     }
 }

@@ -65,10 +65,9 @@ public sealed class Booking : Entity
         Apartment apartment,
         Guid userId,
         DateRange duration,
-        DateTime utcNow,
-        PricingService pricingService)
+        DateTime utcNow)
     {
-        PricingDetails pricingDetails = pricingService.CalculatePrice(apartment, duration);
+        PricingDetails pricingDetails = PricingService.CalculatePrice(apartment, duration);
 
         var booking = new Booking(
             Guid.NewGuid(),

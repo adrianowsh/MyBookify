@@ -5,5 +5,5 @@ public sealed record GetBookingQuery(Guid BookingId) : IQuery<BookingResponse>
 {
     public string CacheKey => $"bookings-{BookingId}";
 
-    public TimeSpan? Expiration => null;
+    public static TimeSpan? Expiration => null;
 }

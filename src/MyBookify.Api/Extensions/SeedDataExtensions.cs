@@ -1,8 +1,9 @@
-﻿using Bogus;
+﻿using System.Data;
+using Bogus;
 using Dapper;
 using MyBookify.Application.Abstractions.Data;
 using MyBookify.Domain.Apartments;
-using System.Data;
+using MyBookify.Domain.Users;
 
 namespace MyBookify.Api.Extensions;
 
@@ -15,6 +16,24 @@ internal static class SeedDataExtensions
         ISqlConnectionFactory sqlConnectionFactory = scope.ServiceProvider.GetRequiredService<ISqlConnectionFactory>();
         using IDbConnection connection = sqlConnectionFactory.CreateConnection();
 
+        InsertRole(connection);
+    }
+
+    private static void InsertRole(IDbConnection connection)
+    {
+
+
+        const string sql =
+            """
+              INSERT INTO public.role_user (roles_id, users_id)
+              VALUES(@roles_id, @users_id);
+            """;
+
+        connection.Execute(sql, new { roles_id = 1, users_id = new Guid("1cd8a1ed-6ef2-4ec1-90a9-c5debedda044") });
+    }
+
+    private static void InsertApartmets(IDbConnection connection)
+    {
         var faker = new Faker();
 
         List<object> apartments = new();
@@ -47,5 +66,6 @@ internal static class SeedDataExtensions
 
         connection.Execute(sql, apartments);
     }
+
 }
 

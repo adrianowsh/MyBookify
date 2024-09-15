@@ -1,11 +1,14 @@
 ﻿using Asp.Versioning;
 using Dapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MyBookify.Application.Abstractions.Authentication;
+using MyBookify.Application.Abstractions.Caching;
 using MyBookify.Application.Abstractions.Clock;
 using MyBookify.Application.Abstractions.Data;
 using MyBookify.Application.Abstractions.Email;
@@ -14,10 +17,16 @@ using MyBookify.Domain.Apartments;
 using MyBookify.Domain.Bookings;
 using MyBookify.Domain.Users;
 using MyBookify.Infrastructure.Authentication;
+using MyBookify.Infrastructure.Authorization;
+using MyBookify.Infrastructure.Caching;
 using MyBookify.Infrastructure.Clock;
 using MyBookify.Infrastructure.Data;
 using MyBookify.Infrastructure.Email;
 using MyBookify.Infrastructure.Repositories;
+using AuthenticationOptions = MyBookify.Infrastructure.Authentication.AuthenticationOptions;
+using AuthenticationService = MyBookify.Infrastructure.Authentication.AuthenticationService;
+using IAuthenticationService = MyBookify.Application.Abstractions.Authentication.IAuthenticationService;
+
 
 
 namespace MyBookify.Infrastructure;
@@ -35,7 +44,11 @@ public static class DependencyInjection
 
         AddAuthentication(services, configuration);
 
+        AddAuthorization(services);
+
         AddApiVersioning(services);
+
+        AddCaching(services, configuration);
 
         return services;
     }
@@ -110,5 +123,28 @@ public static class DependencyInjection
         });
 
         services.AddHttpContextAccessor();
+
+        services.AddScoped<IUserContext, UserContext>();
+    }
+
+    private static void AddAuthorization(IServiceCollection services)
+    {
+        services.AddScoped<AuthorizationService>();
+
+        services.AddTransient<IClaimsTransformation, CustomClaimsTransformation>();
+
+        services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
+
+        services.AddTransient<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
+    }
+
+    private static void AddCaching(IServiceCollection services, IConfiguration configuration)
+    {
+        string connectionString = configuration.GetConnectionString("Cache") ??
+                                  throw new ArgumentNullException(nameof(configuration));
+
+        services.AddStackExchangeRedisCache(options => options.Configuration = connectionString);
+
+        services.AddSingleton<ICacheService, CacheService>();
     }
 }

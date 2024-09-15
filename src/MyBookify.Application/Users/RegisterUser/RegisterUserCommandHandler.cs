@@ -29,6 +29,7 @@ internal sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserC
             new LastName(request.LastName),
             new Email(request.Email));
 
+
         string identityId = await _authenticationService.RegisterAsync(
             user,
             request.Password,

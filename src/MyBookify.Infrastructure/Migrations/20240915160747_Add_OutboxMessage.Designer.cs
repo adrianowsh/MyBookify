@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyBookify.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyBookify.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240915160747_Add_OutboxMessage")]
+    partial class Add_OutboxMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,19 +135,12 @@ namespace MyBookify.Infrastructure.Migrations
                         .HasColumnName("role_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_permissions");
+                        .HasName("pk_permission");
 
                     b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_permissions_role_id");
+                        .HasDatabaseName("ix_permission_role_id");
 
-                    b.ToTable("permissions", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "users:read"
-                        });
+                    b.ToTable("permission", (string)null);
                 });
 
             modelBuilder.Entity("MyBookify.Domain.Users.Role", b =>
@@ -171,29 +167,6 @@ namespace MyBookify.Infrastructure.Migrations
                         {
                             Id = 1,
                             Name = "Registered"
-                        });
-                });
-
-            modelBuilder.Entity("MyBookify.Domain.Users.RolePermission", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("integer")
-                        .HasColumnName("permission_id");
-
-                    b.HasKey("RoleId", "PermissionId")
-                        .HasName("pk_role_permissions");
-
-                    b.ToTable("role_permissions", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = 1,
-                            PermissionId = 1
                         });
                 });
 
@@ -551,7 +524,7 @@ namespace MyBookify.Infrastructure.Migrations
                     b.HasOne("MyBookify.Domain.Users.Role", null)
                         .WithMany("Permissions")
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("fk_permissions_role_role_id");
+                        .HasConstraintName("fk_permission_role_role_id");
                 });
 
             modelBuilder.Entity("RoleUser", b =>

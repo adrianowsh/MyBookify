@@ -1,5 +1,5 @@
 ﻿using MyBookify.Domain.Users;
-using StackExchange.Redis;
+using Role = MyBookify.Domain.Users.Role;
 
 namespace MyBookify.Infrastructure.Repositories;
 internal sealed class UserRepository : Repository<User>, IUserRepository
@@ -11,6 +11,11 @@ internal sealed class UserRepository : Repository<User>, IUserRepository
 
     public override void Add(User user)
     {
+        foreach (Role role in user.Roles)
+        {
+            DbContext.Attach(role);
+        }
+
         DbContext.Add(user);
     }
 }

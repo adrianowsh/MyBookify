@@ -3,8 +3,14 @@
     "Docker Compose": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "mybookify.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
       "serviceActions": {
-        "mybookify.api": "StartDebugging"
+        "mybookify.api": "StartDebugging",
+        "mybookify-db": "StartWithoutDebugging",
+        "mybookify-idp": "StartWithoutDebugging",
+        "mybookify-redis": "StartWithoutDebugging"
       }
     }
   }

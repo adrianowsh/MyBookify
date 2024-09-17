@@ -3,17 +3,8 @@ using MyBookify.Application.Abstractions.Caching;
 using MyBookify.Domain.Users;
 
 namespace MyBookify.Infrastructure.Authorization;
-internal sealed class AuthorizationService
+internal sealed class AuthorizationService(ApplicationDbContext _dbContext, ICacheService _cacheService)
 {
-    private readonly ApplicationDbContext _dbContext;
-    private readonly ICacheService _cacheService;
-
-    public AuthorizationService(ApplicationDbContext dbContext, ICacheService cacheService)
-    {
-        _dbContext = dbContext;
-        _cacheService = cacheService;
-    }
-
     public async Task<UserRolesResponse> GetRolesForUserAsync(string identityId)
     {
         string cacheKey = $"auth:roles-{identityId}";

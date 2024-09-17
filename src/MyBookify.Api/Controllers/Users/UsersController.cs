@@ -23,8 +23,9 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("me")]
+    [MapToApiVersion(ApiVersions.V1)]
     [HasPermission(Permissions.UsersRead)]
-    public async Task<IActionResult> GetLoggedInUser(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetLoggedInUserV1(CancellationToken cancellationToken)
     {
         var query = new GetLoggedInUserQuery();
 

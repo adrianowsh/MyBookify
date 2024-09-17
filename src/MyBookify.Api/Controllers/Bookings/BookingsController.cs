@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Asp.Versioning;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MyBookify.Application.Bookings.GetBooking;
 using MyBookify.Application.Bookings.ReserveBooking;
@@ -6,7 +7,8 @@ using MyBookify.Domain.Abstractions;
 
 namespace MyBookify.Api.Controllers.Bookings;
 
-[Route("api/bookings")]
+[ApiVersion(ApiVersions.V1)]
+[Route("api/v{version:apiVersion}/bookings")]
 [ApiController]
 public sealed class BookingsController(ISender sender) : ControllerBase
 {

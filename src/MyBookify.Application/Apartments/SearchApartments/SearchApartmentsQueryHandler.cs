@@ -6,7 +6,7 @@ using MyBookify.Domain.Abstractions;
 using MyBookify.Domain.Bookings;
 
 namespace MyBookify.Application.Apartments.SearchApartments;
-internal sealed class SearchApartmentsQueryHandler
+internal sealed class SearchApartmentsQueryHandler(ISqlConnectionFactory _sqlConnectionFactory)
     : IQueryHandler<SearchApartmentsQuery, IReadOnlyList<ApartmentResponse>>
 {
     private static readonly int[] ActiveBookingStatuses =
@@ -15,13 +15,6 @@ internal sealed class SearchApartmentsQueryHandler
         (int)BookingStatus.Confirmed,
         (int)BookingStatus.Completed
     };
-
-    private readonly ISqlConnectionFactory _sqlConnectionFactory;
-
-    public SearchApartmentsQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
-    {
-        _sqlConnectionFactory = sqlConnectionFactory;
-    }
 
     public async Task<Result<IReadOnlyList<ApartmentResponse>>> Handle(SearchApartmentsQuery request, CancellationToken cancellationToken)
     {

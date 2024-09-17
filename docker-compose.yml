@@ -34,14 +34,14 @@ services:
     ports:
       - 18080:8080
 
-  # mybookify-seq:
-  #   image: datalust/seq:latest
-  #   container_name: Bookify.Seq
-  #   environment:
-  #     - ACCEPT_EULA=Y
-  #   ports:
-  #     - 5341:5341
-  #     - 8081:80
+  mybookify-seq:
+    image: datalust/seq:latest
+    container_name: MyBookify.Seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:5341
+      - 8081:80
 
   mybookify-redis:
     image: redis:latest
